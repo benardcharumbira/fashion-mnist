@@ -26,8 +26,19 @@ model.compile(optimizer="adam",
               loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 
 # train  model
-model.fit(train_images, train_labels, epochs=10)
+model.fit(train_images, train_labels, epochs=5)
 
-test_loss, test_acc = model.evaluate(test_images, test_labels)
+# Use model
+prediction = model.predict(test_images)
 
-print("Test accuracy: ", test_acc)
+for i in range(5):
+    plt.grid(False)
+    plt.imshow(test_images[i], cmap=plt.cm.binary)
+    plt.xlabel("Actual: " + class_names[test_labels[i]])
+    plt.title("Prediction: " + class_names[np.argmax(prediction[0])])
+    plt.show()
+
+
+# Test Model
+# test_loss, test_acc = model.evaluate(test_images, test_labels)
+# print("Test accuracy: ", test_acc)
